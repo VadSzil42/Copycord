@@ -1,0 +1,39 @@
+services:
+  # 1. Admin Service (Web Interface)
+  - type: web
+    name: copycord-admin
+    image: ghcr.io/copycord/copycord:v2.8.7
+    envVars:
+      - key: ROLE
+        value: admin
+    disk:
+      name: copycord-data
+      mountPath: /data
+      sizeGB: 1
+    # Render will automatically detect port 8080 exposed by the image.
+
+  # 2. Server Service (Background Worker)
+  - type: worker
+    name: copycord-server
+    image: ghcr.io/copycord/copycord:v2.8.7
+    envVars:
+      - key: ROLE
+        value: server
+    # Note: Sharing this disk requires a Render Team plan or specific volume config
+    disk:
+      name: copycord-data
+      mountPath: /data
+      sizeGB: 1
+
+  # 3. Client Service (Background Worker)
+  - type: worker
+    name: copycord-client
+    image: ghcr.io/copycord/copycord:v2.8.7
+    envVars:
+      - key: ROLE
+        value: client
+    # Note: Sharing this disk requires a Render Team plan or specific volume config
+    disk:
+      name: copycord-data
+      mountPath: /data
+      sizeGB: 1
