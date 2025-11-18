@@ -2,6 +2,7 @@ services:
   # 1. Admin Service (Web Interface)
   - type: web
     name: copycord-admin
+    env: image                    # <--- THIS WAS MISSING
     image:
       url: ghcr.io/copycord/copycord:v2.8.7
     envVars:
@@ -16,6 +17,7 @@ services:
   # 2. Server Service (Background Worker)
   - type: worker
     name: copycord-server
+    env: image                    # <--- THIS WAS MISSING
     image:
       url: ghcr.io/copycord/copycord:v2.8.7
     envVars:
@@ -29,6 +31,7 @@ services:
   # 3. Client Service (Background Worker)
   - type: worker
     name: copycord-client
+    env: image                    # <--- THIS WAS MISSING
     image:
       url: ghcr.io/copycord/copycord:v2.8.7
     envVars:
